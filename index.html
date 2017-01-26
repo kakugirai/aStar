@@ -4,7 +4,7 @@
     <link href="style.css" rel="stylesheet" />
     <meta charset=utf-8 />
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
-    <title>aStar algorithm visualization</title>
+    <title>Graph Algorithm Visualization</title>
     <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>
     <script src="./node_modules/cytoscape/dist/cytoscape.min.js"></script>
@@ -13,17 +13,17 @@
   <body>
     <div class="container">
       <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-12">
           <div class="panel panel-primary">
             <div class="panel-heading">
-              <h3 class="panel-title">aStar Algorithm Visualization</h3>
+              <h3 class="panel-title">Graph Algorithm Visualization</h3>
               <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
             </div>
             <div class="panel-body">
               <div class="row">
-                <div class="col-md-9">
+                <div class="col-md-12">
                   <p>
-                    You can double-click the free space below to create a node. To add an edge, tap the first node you want to select then hold down the modifier key ( <kbd>⌘</kbd> on mac, not sure about Windows... maybe <kbd>alt</kbd> ? ) and tap the second node. A dialog box will prompt you to input the cost of the edge.
+                    You can double-click the free space below to create a node. To add an edge, tap the first node you want to select then hold down the modifier key ( <kbd>⌘</kbd> on macOS or <kbd>ctrl</kbd> on Windows ) and tap the second node. A dialog box will prompt you to input the cost of the edge.
                   </p>
                   <p>
                     Once the run button is clicked, aStar algorithm will highlight the smallest cost path from source node to destination node.
@@ -43,8 +43,11 @@
                     <input type="text" class="form-control" id="endNode">
                   </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
                   <button id="aStarBtn" class="btn btn-default">Run</button>
+                </div>                
+                <div class="col-md-1">
+                  <button id="clearBtn" class="btn btn-default">Clear All</button>
                 </div>
               </div>
             </div>

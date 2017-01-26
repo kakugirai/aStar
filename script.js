@@ -12,7 +12,8 @@ $(function() {
         'target-arrow-shape': 'none',
         'width': 4,
         'line-color': '#ddd',
-        'curve-style': 'bezier'
+        'curve-style': 'bezier',
+        'content': 'data(weight)'
       })
       .selector('.highlighted')
       .css({
@@ -34,7 +35,8 @@ $(function() {
       position: {
         x: e.pageX,
         y: e.pageY
-      }
+      },
+      classes : "node"
     });
     count++;
   });
@@ -57,7 +59,7 @@ $(function() {
             weight: edgeWeight,
             source: selectedNodes[0],
             target: selectedNodes[1],
-            label: "edgeWeight"
+            classes: "edge"
           }
         })
       }
@@ -67,12 +69,38 @@ $(function() {
     }
   });
 
-  $("#aStarBtn").click(function() {
+  // $("#aStarBtn").click(function() {
 
-    var aStar = cy.elements().aStar({
-      root: "#" + $('#startNode').val(),
-      goal: "#" + $('#endNode').val()
-    });
-    aStar.path.select();
+  //   var aStar = cy.elements().aStar({
+  //     root: "#" + $('#startNode').val(),
+  //     goal: "#" + $('#endNode').val()
+  //   });
+  //   aStar.path.select();
+  // })
+
+
+  $("#aStarBtn").click(function() {
+    var dijkstra = cy.elements().dijkstra(("#" + $('#startNode').val()), function(){
+      console.log("id: " + this.data('id') + "\nweight: " + this.data('weight'));
+      return this.data('weight');
+  }, false);
+    var pathToJ = dijkstra.pathTo( cy.$("#" + $('#endNode').val()) );
+
+    for (var i = pathToJ.length - 1; i >= 0; i--) {
+      console.log(pathToJ[i])
+      pathToJ[i].addClass('highlighted');
+    }
+    // var i = 0;
+    // var highlightNextEle = function(){
+    //   if( i < pathToJ.length ){
+    //     pathToJ[i].addClass('highlighted');
+    //     i++;
+    //     setTimeout(highlightNextEle, 500);
+    //   }
+    // };
+    // highlightNextEle();
+  })
+  $("#clearBtn").click(function() {
+    cy.$().remove();
   })
 });
