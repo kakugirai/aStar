@@ -26,13 +26,22 @@ $(function() {
   $('#cy').dblclick(function(e) {
     // console.log(e.pageX)
     // console.log(e.pageY)
-    cy.add({ group: "nodes", data: { id: count }, position: { x: e.pageX, y: e.pageY } });
+    cy.add({
+      group: "nodes",
+      data: {
+        id: count
+      },
+      position: {
+        x: e.pageX,
+        y: e.pageY
+      }
+    });
     count++;
   });
 
   $('#cy').click(function(e) {
     selectedNodes = []
-    cy.elements().each(function(i, ele){
+    cy.elements().each(function(i, ele) {
       if (ele.selected()) {
         selectedNodes.push(ele.id())
       }
@@ -41,17 +50,29 @@ $(function() {
     if (selectedNodes.length == 2) {
       edgeWeight = prompt("Please enter the cost of the edge")
       if (edgeWeight != null) {
-        cy.add({ group: "edges", data: { id: selectedNodes[0]+selectedNodes[1], weight: edgeWeight, source: selectedNodes[0], target: selectedNodes[1], label: "edgeWeight" } })
+        cy.add({
+          group: "edges",
+          data: {
+            id: selectedNodes[0] + selectedNodes[1],
+            weight: edgeWeight,
+            source: selectedNodes[0],
+            target: selectedNodes[1],
+            label: "edgeWeight"
+          }
+        })
       }
       for (var i = selectedNodes.length - 1; i >= 0; i--) {
-        cy.$('#'+ selectedNodes[i]).unselect();
+        cy.$('#' + selectedNodes[i]).unselect();
       }
     }
   });
 
-  $("#aStarBtn").click(function(){
+  $("#aStarBtn").click(function() {
 
-    var aStar = cy.elements().aStar({ root: "#"+$('#startNode').val(), goal: "#"+$('#endNode').val() });
+    var aStar = cy.elements().aStar({
+      root: "#" + $('#startNode').val(),
+      goal: "#" + $('#endNode').val()
+    });
     aStar.path.select();
   })
 });

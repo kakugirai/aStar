@@ -1,2 +1,2 @@
-# dijkstra
-dijkstra algorithm visualization
+# aStar
+aStar algorithm visualization
